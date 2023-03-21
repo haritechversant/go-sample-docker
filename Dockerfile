@@ -1,6 +1,7 @@
 FROM golang:1.19.0
 
-WORKDIR /usr/src/app
+WORKDIR /github.com/haritechversant/go-sample-docker
+
 
 RUN go install github.com/cosmtrek/air@latest
 
