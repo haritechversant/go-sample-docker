@@ -9,10 +9,10 @@ func main() {
 	database.ConnectDb()
 	app := fiber.New()
 
-	// setupRoutes(app)
+	setupRoutes(app)
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Div Rhino Trivia App!")
+		return c.SendString("Hello world!")
 	})
 
 	app.Listen(":3000")
