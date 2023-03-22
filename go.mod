@@ -1,10 +1,9 @@
-module github.com/divhrhino/divhrhino-trivia
-
+module github.com/haritechversant/go-sample-docker
 go 1.19
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/divrhino/divrhino-trivia v0.0.0-20221017051552-eec99bad7aea // indirect
+	github.com/haritechversant/go-sample-docker  v0.0.0-20221017051552-eec99bad7aea // indirect
 	github.com/gofiber/fiber/v2 v2.42.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect

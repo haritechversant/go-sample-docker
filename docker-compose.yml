@@ -7,7 +7,6 @@ services:
         ports:
           - "3000:3000"
        
-        command: air ./cmd/main.go -b 0.0.0.0
     db:
         image: postgres:12
         environment:
