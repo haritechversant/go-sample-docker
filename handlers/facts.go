@@ -25,3 +25,51 @@ func CreateFact(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(fact)
 }
+
+func UpdateFact(c *fiber.Ctx) error {
+	// Get the fact ID from the request parameters
+	factID := c.Params("id")
+
+	// Check if the fact exists in the database
+	var fact models.Fact
+	if err := database.DB.Db.First(&fact, factID).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Fact not found",
+		})
+	}
+
+	// Parse the request body into a new Fact object
+	newFact := new(models.Fact)
+	if err := c.BodyParser(newFact); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+
+	// Update the fact in the database
+	fact.Question = newFact.Question
+	fact.Answer = newFact.Answer
+	database.DB.Db.Save(&fact)
+
+	return c.Status(fiber.StatusOK).JSON(fact)
+}
+
+func DeleteFact(c *fiber.Ctx) error {
+	// Get the fact ID from the request parameters
+	factID := c.Params("id")
+
+	// Check if the fact exists in the database
+	var fact models.Fact
+	if err := database.DB.Db.First(&fact, factID).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Fact not found",
+		})
+	}
+
+	// Delete the fact from the database
+	database.DB.Db.Delete(&fact)
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Fact deleted successfully",
+	})
+}
